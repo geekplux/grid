@@ -1,21 +1,22 @@
 ##Grid
 
-A simple guide to responsive design.<br>
-www.adamkaplan.me/grid
+响应式设计简易指南<br>
+原文： www.adamkaplan.me/grid
+中文版： www.geekplux.com/grid
 
-####Why bother with responsive?
-We want our websites to be useable on all devices by responding to the user’s behavior, screen size and screen orientation.
+####为什么要使用响应式设计？
+我们想让我们的网站通过响应用户的行为、设备的屏幕大小和屏幕方向，从而在所有设备上都能用。
 
-####A Fragmented World
-As of 2013, there are thousands of different devices and screen sizes that browse the internet, so it's impossible to design layouts to target them all. Instead, we must take a more fluid approach to design.
+####一个碎片化的世界
+截止2013年，有成千上万种不同的设备在浏览网页，所以我们不可能设计出适应所有屏幕大小的网页。相反，我们必须得采用一种更加流畅的方式去设计。
 
-####Mobile First
-The term “mobile first” gets thrown around a lot lately. What it really means is to start with mobile styles and layer on styles optimized for larger screens only as needed. In other words, your mobile styles become the default and you no longer have to override them later. It’s much simpler!
+####移动优先
+最近一个比较火的词叫移动优先。它的意思是，先为移动端设计样式，然后再根据需求去优化更大屏幕的样式。换句话说，假如你把移动端样式当成网站的默认样式，且以后不用去优化它，一步到位。那就更省事了！
 
-> By assuming a flexible but simple layout by default, you can better guard against browsers—with viewports wide and small—that aren’t quite capable of the full responsive layout. So when we’re talking about layout, “mobile first” really means “progressive enhancement.” —Ethan Marcotte
+> “假定默认使用一个灵活但简单的布局，你的确可以适配各种浏览器，但这还不算是完全做到了响应式布局。所以当我们谈论「移动优先」，实际上是在说「渐进增强」。” —Ethan Marcotte
 
-##Min-width Media Queries
-Introduce layout-specific rules only when you need them. Use `min-width` to layer complexity on your layout as the viewport widens. It’s easier to have all the media queries nearby, rather than at the end of the stylesheet or in a separate document.
+##用 Min-width 进行媒体查询（ Media Queries ）
+现在来介绍一种特别的布局方式。 通过 min-width 来界定不同屏幕该如何布局。它能就近检测出不同设备的屏幕大小（即 media queries，可直译为媒体查询），比在样式表末尾或一个单独文件中处理更简单。
 
 ```css
 /* Small screens (default) */
@@ -32,24 +33,26 @@ html { font-size: 100%; }
 }
 ```
 
-##Steps
+##步骤
 
-####1. Not All Browsers are Created Equal
-Browsers will render your CSS differently. To avoid this, it’s a good idea to use a modern alternative to a reset like [Normalize.css](http://necolas.github.io/normalize.css/), which will render elements more consistently cross-browser. Remember to include it as-is before your stylesheet.
+####1. 不是所有浏览器生而平等
+同一份 CSS，不同浏览器渲染出来的效果不一样。为了避免出现这种情况，你可以使用类似 [Normalize.css](http://necolas.github.io/normalize.css/) 这种更好的 CSS 来帮助你实现跨浏览器显示。当然，你要把这份CSS放在你样式表最前面。
 
 ```html
 <link rel="stylesheet" href="/css/normalize.css">
 <link rel="stylesheet" href="/css/grid.css">
 ```
 
-####2. Add the Viewport Meta Tag
-Place in the `<head>` of your HTML. This enables use of media queries for cross-device layouts.
+####2. 在 Viewport 里加 Meta 标签
+在你 HTML 的 `head` 代码里添加 Meta 标签。它可以使 media queries 在不同设备上起作用
+
 ```html
 <meta name="viewport" content="width=device-width, initial-scale=1">
 ```
 
-####3. Use box-sizing: border-box
-Place at the top of your CSS file. The `*` will target all elements on the page.
+####3. CSS 盒模型
+在 CSS 文件最顶端设置 box-sizing。运用 `*` 通用选择器使其应用到页面的每个元素上。
+
 ```css
 *, *:before, *:after {
   -moz-box-sizing: border-box;
@@ -58,8 +61,9 @@ Place at the top of your CSS file. The `*` will target all elements on the page.
 }
 ```
 
-####4. Create a Container
-A container holds all elements and controls the page's maximum width. Using a container will make designing for responsive easier!
+####4. 创建容器
+一个容器将包含页面所有标签，并控制页面最大宽度. 运用容器，让我们的响应式设计更进了一步！
+
 ```css
 .container {
   margin: 0 auto;
@@ -74,8 +78,8 @@ A container holds all elements and controls the page's maximum width. Using a co
 </div>
 ```
 
-####5. Create a Column
-With mobile first, columns are `block` level (takes up the full width available) by default. No additional styles needed!
+####5. 创建列
+在移动优先里，列默认均是 `block` 级别的（可以占满整行的宽度）。不需要额外的样式！
 
 ```html
 <div class="container">
@@ -85,8 +89,8 @@ With mobile first, columns are `block` level (takes up the full width available)
 </div>
 ```
 
-####6. Create Column Sizes
-On larger screens, columns gain `float: left` in order to stack content horizontally. Columns now use padding for gutters, so you no longer need to worry about removing margins.
+####6. 创建列宽
+在大屏中，用 `float: left` 将列水平排列。然后运用 padding 设置相邻两列之间的间隙，忘掉传统的margin吧。
 
 ```html
 <div class="container">
@@ -118,8 +122,8 @@ On larger screens, columns gain `float: left` in order to stack content horizont
 }
 ```
 
-####7. Create Rows
-Columns are wrapped in rows to prevent other elements from stacking next to them, otherwise know as clearing issues. Rows are cleared using the popular `clearfix`, which was created by [Nicolas Gallagher](http://nicolasgallagher.com/micro-clearfix-hack/).
+####7. 创建行
+列应该包裹在行内，以避免其他元素堆放在其旁边造成布局混乱。否则就会出现广为人知的 clearing 问题。出现之后可以使用由 [Nicolas Gallagher](http://nicolasgallagher.com/micro-clearfix-hack/) 发明的 `clearfix` 解决。
 
 ```html
 <div class="container">
@@ -159,8 +163,8 @@ Columns are wrapped in rows to prevent other elements from stacking next to them
 }
 ```
 
-#### Flow Opposite
-Add the class `.flow-opposite` to columns where you want content to display first on mobile but appear on the right on larger screens.
+#### 相对流（ Flow Opposite ）
+给你想让它在移动端优先显示，而在大屏幕中右侧显示的列，添加 `.flow-opposite` 类。
 
 ```html
 <div class="container">
@@ -181,7 +185,7 @@ Add the class `.flow-opposite` to columns where you want content to display firs
 }
 ```
 
-####Further Reading
+####延伸阅读
 * [A Book Apart: Mobile First](http://www.abookapart.com/products/mobile-first)
 * [A Book Apart: Responsive Web Design](http://www.abookapart.com/products/responsive-web-design)
 * [Beginner’s Guide to Responsive Web Design](http://blog.teamtreehouse.com/beginners-guide-to-responsive-web-design)
@@ -190,7 +194,7 @@ Add the class `.flow-opposite` to columns where you want content to display firs
 * [The Many Faces of ‘Mobile First’](http://bradfrostweb.com/blog/mobile/the-many-faces-of-mobile-first/)
 * [Understanding the Humble Clearfix](http://fuseinteractive.ca/blog/understanding-humble-clearfix)
 
-####References
+####参考文献
 * [Android Fragmentation Visualized](http://opensignal.com/reports/fragmentation-2013/)
 * [Animate.css](http://daneden.github.io/animate.css/)
 * [Box Model](http://developer.mozilla.org/en-US/docs/Web/CSS/box_model)
