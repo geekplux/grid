@@ -1,8 +1,9 @@
 ##Grid
 
 响应式设计简易指南<br>
-原文： www.adamkaplan.me/grid
-中文版： www.geekplux.com/grid
+
+- 原文： http://www.adamkaplan.me/grid
+- 中文版： http://geekplux.github.io/grid
 
 ####为什么要使用响应式设计？
 我们想让我们的网站通过响应用户的行为、设备的屏幕大小和屏幕方向，从而在所有设备上都能用。
